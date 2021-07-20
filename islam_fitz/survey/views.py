@@ -107,23 +107,26 @@ class CreateClientAnswerMethod(viewsets.ViewSet):
         if client_ser.is_valid():
             client_ser.save()
             print("client_ser.data",client_ser.data)
-            print("answer",answer)
-            answersID=[]
-            for i in range(len(answer)):
-                x = answer[i]['client_answer']
-                answersID.append(x)
-                i = i+1
-            print("answerID: ", answersID)
+            print("answer:",answer)
+
+            # answersID=[]
+            # for i in range(len(answer)):
+            #     x = answer[i]['client_answer']
+            #     answersID.append(x)
+            #     i = i+1
+            # print("answerID: ", answersID)
             clientID = Client.objects.get(phone=data["phone"]).id
+            print("clientID: ", clientID)
+            # clientID.id
             i = 0
-            for j in answersID:
-                clientAnswer_data = {"client":clientID, "client_answer":answersID[i]}
+            for j in answer:
+                clientAnswer_data = {"client":clientID, "client_answer":answer[i]}
                 clientAnswer_ser = ClientAnswerListSerializer(data = clientAnswer_data)
                 i = i+1
                 if clientAnswer_ser.is_valid():
                     clientAnswer_ser.save()
                 else:
-                    return Response("Invaliddd data!", status=400)
+                    return Response("Invalid data!, phone number already exist", status=400)
             return Response("Client created successfully", status=201)
         return Response("Invalid data!", status=400)
 
