@@ -67,7 +67,7 @@ class FooterMethod(viewsets.ViewSet):
         ser = FooterSerializer(footer, many=True)
         return Response(ser.data, status=200)
 
-class FAQMetod(viewsets.ViewSet):
+class FAQMethod(viewsets.ViewSet):
     permission_classes = [AllowAny]
     queryset = Footer.objects.none()
 
