@@ -6,7 +6,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Answer
-        fields = ('answer_title', "answer", "hasCourse", "course")
+        fields = ('id','answer_title', "answer", "hasCourse", "course")
 
 class QuestionSerializer(serializers.ModelSerializer):
 
@@ -23,16 +23,21 @@ class QuestionSerializer(serializers.ModelSerializer):
         )
     
 class QuestionAnswerListSerializer(serializers.ModelSerializer):
-
+    answer_url = serializers.SerializerMethodField()
     class Meta:
         model = QuestionAnswerList
-        fields = ("question", "answer")
+        fields = ('id',"question", "answer_url")
+    
+    def get_answer_url(self, answer):
+        request = self.context.get("request")
+        answer_url = answer.image.url
+        return request.build_absolute_uri(answer_url)
 
 class MyQuestionAnswerSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = QuestionAnswerList
-        fields = ("answer",)
+        fields = ('id', "answer",)
         depth = 1
 
 class QuestionAnswerSerializer(serializers.ModelSerializer):
@@ -60,6 +65,7 @@ class LastPageSerializer(serializers.ModelSerializer):
     class Meta:
         model = LastPage
         fields = (
+            'id',
             "video",
             "description",
             "whatsapp_number"
@@ -70,6 +76,7 @@ class ClientAnswerListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ClientAnswerList
         fields = (
+            'id',
             "client",
             "client_answer",
         )
@@ -78,6 +85,7 @@ class ClientSerializer(serializers.ModelSerializer):
     class Meta:
         model = Client
         fields = (
+            'id',
             "type",
             "name",
             "phone",

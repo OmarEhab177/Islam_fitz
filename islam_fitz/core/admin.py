@@ -7,3 +7,6 @@ admin.site.register(AboutUs)
 admin.site.register(Home)
 admin.site.register(Footer)
 admin.site.register(FAQ)
+
+admin.site.site_header = "Islam Fitz"
+admin.site.site_title = "Fitz"

@@ -75,6 +75,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_yasg",
+    "sorl.thumbnail",
 ]
 
 LOCAL_APPS = [

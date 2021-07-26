@@ -28,7 +28,7 @@ class QuestionAnswerMethod(viewsets.ViewSet):
         print("len questions: ", len(questions))
         if len(questions) == 0:
             return Response("Invalid data!", status=400)
-        ser = QuestionAnswerSerializer(questions, many=True)
+        ser = QuestionAnswerSerializer(questions, context={"request": request}, many=True)
         return Response(ser.data)
         
 

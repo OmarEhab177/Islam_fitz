@@ -1,5 +1,6 @@
+from django.db.models.query import EmptyQuerySet
 from islam_fitz.core.models import BeforeAndAfter, AboutUs, FAQ, Home, Footer
-from islam_fitz.core.serializers import BeforeAndAfterSerializer, AboutUsSerializer, FAQSerializer, HomeSerializer, FooterSerializer
+from islam_fitz.core.serializers import BeforeAndAfterSerializer, AboutUsSerializer, FAQSerializer, HomeSerializer, FooterSerializer, PaginatorBeforeAndAfterSerializer
 from rest_framework import viewsets
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -10,7 +11,8 @@ class BeforeAndAfterMethod(viewsets.ViewSet):
     list:
     return before and after images:
     take the following paramater:
-    - feature 
+    - feature
+    - page     int
     if "feature" passed in paramater it will retrieve last 8 'before and after' objects 
     "/v1/api/before_after?feature"
     """
@@ -20,14 +22,16 @@ class BeforeAndAfterMethod(viewsets.ViewSet):
 
     def list(self, request):
         bAf = BeforeAndAfter.objects.all()
+        page = request.GET.get('page')
         feature = request.GET.get("feature")
-        if (feature is not None):
+        if (feature is not None and feature !=""):
+            feature = int(feature)
             bAf = bAf.filter(feature=True)
             bAf = bAf.distinct()
-            bAf = bAf[::-1][:8]
+            bAf = bAf[::-1][:feature]
         else:
             bAf = bAf[::-1]
-        ser = BeforeAndAfterSerializer(bAf, many=True)
+        ser = PaginatorBeforeAndAfterSerializer(bAf, request, 4)
         return Response(ser.data, status=200)
 
 class AboutUsMethod(viewsets.ViewSet):
@@ -40,7 +44,7 @@ class AboutUsMethod(viewsets.ViewSet):
 
     def list(self, request):
         about = AboutUs.objects.all()
-        ser = AboutUsSerializer(about, many=True)
+        ser = AboutUsSerializer(about, context={"request": request}, many=True)
         return Response(ser.data, status=200)
 
 
@@ -55,7 +59,7 @@ class HomeMethod(viewsets.ViewSet):
 
     def list(self, request):
         home = Home.objects.all()
-        ser = HomeSerializer(home, many=True)
+        ser = HomeSerializer(home, context={"request": request}, many=True)
         return Response(ser.data, status=200)
 
 class FooterMethod(viewsets.ViewSet):

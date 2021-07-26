@@ -1,4 +1,6 @@
 from django.db import models
+from sorl.thumbnail import get_thumbnail
+from django.utils.html import format_html
 
 # Create your models here.
 
@@ -14,6 +16,17 @@ class Answer(models.Model):
     class Meta:
         verbose_name = 'Answer'
         verbose_name_plural = 'Answer'
+
+    @property
+    def answer_preview(self):
+        if self.answer:
+            _answer = get_thumbnail(self.answer,
+                                   '300x300',
+                                   upscale=False,
+                                   crop=False,
+                                   quality=100)
+            return format_html('<img src="{}" width="{}" height="{}">'.format(_answer.url, _answer.width, _answer.height))
+        return ""
 
     def __str__(self):
         return self.answer_title
@@ -69,7 +82,7 @@ class LastPage(models.Model):
 
 
 
-################################# Data reception #############################
+################################# Received Data #############################
 
 # class ClientAnswer(models.Model):
 #     # client_answer = models.ImageField(upload_to = 'photos/client_answers/%y/%m/%d')
@@ -98,9 +111,6 @@ class ClientAnswerList(models.Model):
     client_answer = models.ForeignKey(Answer ,on_delete=models.PROTECT)
 
     class Meta:
-        unique_together = [
-            ("client", "client_answer"),
-        ]
         verbose_name = 'ClientAnswerList'
         verbose_name_plural = 'ClientAnswerList'
 
