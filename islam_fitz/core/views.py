@@ -31,7 +31,7 @@ class BeforeAndAfterMethod(viewsets.ViewSet):
             bAf = bAf[::-1][:feature]
         else:
             bAf = bAf[::-1]
-        ser = PaginatorBeforeAndAfterSerializer(bAf, request, 4)
+        ser = PaginatorBeforeAndAfterSerializer(bAf, request, 12)
         return Response(ser.data, status=200)
 
 class AboutUsMethod(viewsets.ViewSet):
