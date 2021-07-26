@@ -61,7 +61,7 @@ class LastPageMethod(viewsets.ViewSet):
 
     def list(self, request):
         lastpage = LastPage.objects.all()
-        ser = LastPageSerializer(lastpage, many=True)
+        ser = LastPageSerializer(lastpage, context={"request": request}, many=True)
         return Response(ser.data, status=200)
 
 

@@ -12,8 +12,8 @@ class BeforeAndAfterMethod(viewsets.ViewSet):
     return before and after images:
     take the following paramater:
     - feature
-    - page     int
-    if "feature" passed in paramater it will retrieve last 8 'before and after' objects 
+    - page     int  add number of page u want to access
+    if "feature" passed in paramater it will retrieve number of feature 'before and after' objects 
     "/v1/api/before_after?feature"
     """
 

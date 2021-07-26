@@ -61,15 +61,19 @@ class QuestionAnswerSerializer(serializers.ModelSerializer):
 
 
 class LastPageSerializer(serializers.ModelSerializer):
-
+    video_url = serializers.SerializerMethodField()
     class Meta:
         model = LastPage
         fields = (
             'id',
-            "video",
+            "video_url",
             "description",
             "whatsapp_number"
         )
+    def get_video_url(self, lastPage):
+        request = self.context.get("request")
+        video_url = lastPage.video.url
+        return request.build_absolute_uri(video_url)
 
 
 class ClientAnswerListSerializer(serializers.ModelSerializer):
