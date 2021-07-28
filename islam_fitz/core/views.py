@@ -48,7 +48,7 @@ class AboutUsMethod(viewsets.ViewSet):
         return Response(ser.data, status=200)
 
 
-class HomeMethod(viewsets.ViewSet):
+class HomeViewMethod(viewsets.ViewSet):
     """
     Retrieve:
     retrieve Home page
