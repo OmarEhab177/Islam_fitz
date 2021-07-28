@@ -47,8 +47,8 @@ urlpatterns += [
     path("api/", include("config.api_router")),
     # DRF auth token
     path("auth-token/", obtain_auth_token),
-    path("", include(("islam_fitz.core.urls","islam_fitz.core"), namespace="core_v1")),
-    path("survey/", include(("islam_fitz.survey.urls","islam_fitz.survey"), namespace="survey_v1")),
+    path("v1/api/", include(("islam_fitz.core.urls","islam_fitz.core"), namespace="core_v1")),
+    path("v1/api/survey/", include(("islam_fitz.survey.urls","islam_fitz.survey"), namespace="survey_v1")),
 ]
 
 urlpatterns +=  [
@@ -60,9 +60,7 @@ if settings.DEBUG:
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
-        path(
-            "400/",
-            default_views.bad_request,
+        path("400/",default_views.bad_request,
             kwargs={"exception": Exception("Bad Request!")},
         ),
         path(
