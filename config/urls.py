@@ -26,7 +26,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("errors/", TemplateView.as_view(template_name="pages/home.html"), name="error"),
+    path("errors/", TemplateView.as_view(template_name="pages/error.html"), name="error"),
     path(
         "error/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
