@@ -5,10 +5,10 @@ from islam_fitz.core.views import BeforeAndAfterMethod, AboutUsMethod, HomeMetho
 
 
 router_core = DefaultRouter(trailing_slash=False)
-router_core.register('', HomeMethod)
+router_core.register('FAQ', HomeMethod)
 router_core.register('about', AboutUsMethod)
 router_core.register('before_after', BeforeAndAfterMethod)
-router_core.register('FAQ', FAQMethod)
+router_core.register('', FAQMethod)
 
 urlpatterns = [
     path('', include(router_core.urls)),
