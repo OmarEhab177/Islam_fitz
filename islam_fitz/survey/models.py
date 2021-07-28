@@ -29,7 +29,7 @@ class Answer(models.Model):
         return ""
 
     def __str__(self):
-        return self.answer_title
+        return self.answer_preview
 
 
 
@@ -99,6 +99,7 @@ class Client(models.Model):
     phone  = models.CharField(max_length=50, unique=True)
     length = models.DecimalField(max_digits=8, decimal_places=2)
     weight = models.DecimalField(max_digits=8, decimal_places=2)
+    description = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Client'

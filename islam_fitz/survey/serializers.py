@@ -94,7 +94,8 @@ class ClientSerializer(serializers.ModelSerializer):
             "name",
             "phone",
             "length",
-            "weight"
+            "weight",
+            "description"
         )
         
 

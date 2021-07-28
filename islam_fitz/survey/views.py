@@ -94,6 +94,7 @@ class CreateClientAnswerMethod(viewsets.ViewSet):
     - phone
     - length
     - weight
+    - description
     - answer
     """
     permission_classes = [AllowAny]
@@ -102,7 +103,7 @@ class CreateClientAnswerMethod(viewsets.ViewSet):
     def create(self, request):
         data = JSONParser().parse(request)
         answer = data['answer']
-        client_data = {"type":data["type"], "name":data["name"], "phone":data["phone"], "length":data["length"], "weight":data["weight"]}
+        client_data = {"type":data["type"], "name":data["name"], "phone":data["phone"], "length":data["length"], "weight":data["weight"], "description":data["description"]}
         client_ser = ClientSerializer(data=client_data)
         if client_ser.is_valid():
             client_ser.save()

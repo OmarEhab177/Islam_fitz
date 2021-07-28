@@ -62,6 +62,7 @@ class HomeSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "logo_url",
+            "intro_title",
             "intro_image_url",
             "intro_text",
             "about_us_image_url",

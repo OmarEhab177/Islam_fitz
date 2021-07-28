@@ -26,9 +26,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+    path("errors/", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path(
-        "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
+        "error/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
@@ -47,8 +47,8 @@ urlpatterns += [
     path("api/", include("config.api_router")),
     # DRF auth token
     path("auth-token/", obtain_auth_token),
-    path("v1/api/", include(("islam_fitz.survey.urls","islam_fitz.survey"), namespace="survey_v1")),
-    path("v1/api/", include(("islam_fitz.core.urls","islam_fitz.core"), namespace="core_v1"))
+    path("", include(("islam_fitz.core.urls","islam_fitz.core"), namespace="core_v1")),
+    path("survey/", include(("islam_fitz.survey.urls","islam_fitz.survey"), namespace="survey_v1")),
 ]
 
 urlpatterns +=  [
