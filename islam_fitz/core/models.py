@@ -29,7 +29,7 @@ class AboutUs(models.Model):
 class Home(models.Model):
     logo = models.ImageField(upload_to = 'photos/logo/%y/%m/%d')
     blog = models.CharField(max_length=250)
-    intro_title = models.CharField(max_length=250, null=True, blank=True)
+    intro_title = models.CharField(max_length=250, null=True, blank=True, default=1)
     intro_image = models.ImageField(upload_to = 'photos/home/%y/%m/%d')
     intro_text = models.TextField()
     about_us_image = models.ImageField(upload_to = 'photos/home/%y/%m/%d')
