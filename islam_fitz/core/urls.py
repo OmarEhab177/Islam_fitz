@@ -5,7 +5,7 @@ from islam_fitz.core.views import BeforeAndAfterMethod, AboutUsMethod, HomeViewM
 
 
 router_core = DefaultRouter(trailing_slash=False)
-router_core.register('bla_bla', HomeViewMethod)
+router_core.register('', HomeViewMethod)
 router_core.register('about', AboutUsMethod)
 router_core.register('before_after', BeforeAndAfterMethod)
 router_core.register('FAQ', FAQMethod)

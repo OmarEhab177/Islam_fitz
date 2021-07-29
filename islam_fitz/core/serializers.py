@@ -66,8 +66,7 @@ class HomeSerializer(serializers.ModelSerializer):
             "intro_image_url",
             "intro_text",
             "about_us_image_url",
-            "about_us_text"
-
+            "about_us_text",
         )
     def get_logo_url(self, home):
         request = self.context.get("request")
@@ -86,7 +85,7 @@ class HomeSerializer(serializers.ModelSerializer):
 
 class FooterSerializer(serializers.ModelSerializer):
     class Meta:
-        model: Footer
+        model = Footer
         fields = (
             "id",
             "facebook",
