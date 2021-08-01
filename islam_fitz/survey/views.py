@@ -29,7 +29,7 @@ class QuestionAnswerMethod(viewsets.ViewSet):
         if len(questions) == 0:
             return Response("Invalid data!", status=400)
         ser = QuestionAnswerSerializer(questions, context={"request": request}, many=True)
-        return Response(ser.data)
+        return Response(ser.data, status=200)
         
 
 class AnotherQuestionAnswerMethod(viewsets.ViewSet):
@@ -54,7 +54,7 @@ class AnotherQuestionAnswerMethod(viewsets.ViewSet):
             if len(questions) == 0:
                 return Response("Invalid data!", status=400)
             ser = QuestionAnswerSerializer(questions, context={"request": request}, many=True)
-            return Response(ser.data)
+            return Response(ser.data, status=200)
         else:
             return Response("type must be Man or Woman", status=400)
 
