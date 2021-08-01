@@ -44,7 +44,7 @@ class AnotherQuestionAnswerMethod(viewsets.ViewSet):
     queryset = Question.objects.none()
 
     def list(self, request):
-        data = JSONParser().parse(request)
+        # data = JSONParser().parse(request)
         sex_type = request.GET.get("type")
         if (sex_type is not None and sex_type !=""):
             question = Question.objects.all()
