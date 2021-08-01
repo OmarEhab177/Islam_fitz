@@ -32,6 +32,31 @@ class QuestionAnswerMethod(viewsets.ViewSet):
         return Response(ser.data)
         
 
+class AnotherQuestionAnswerMethod(viewsets.ViewSet):
+    """
+    list:
+    Return questions and answers.
+    takes the following fields:
+    - type  "Man or Woman"
+    """
+
+    permission_classes = [AllowAny]
+    queryset = Question.objects.none()
+
+    def list(self, request):
+        data = JSONParser().parse(request)
+        sex_type = request.GET.get("type")
+        if (sex_type is not None and sex_type !=""):
+            question = Question.objects.all()
+            questions = question_type_filter(question, sex_type)
+            print("questions: ", questions)
+            print("len questions: ", len(questions))
+            if len(questions) == 0:
+                return Response("Invalid data!", status=400)
+            ser = QuestionAnswerSerializer(questions, context={"request": request}, many=True)
+            return Response(ser.data)
+        else:
+            return Response("type must be Man or Woman", status=400)
 
 
 def question_type_filter(question, sex_type):
