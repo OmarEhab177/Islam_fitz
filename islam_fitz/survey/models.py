@@ -29,7 +29,7 @@ class Answer(models.Model):
         return ""
 
     def __str__(self):
-        return self.answer_preview
+        return self.answer_title
 
 
 
