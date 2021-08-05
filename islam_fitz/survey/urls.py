@@ -9,8 +9,8 @@ router.register('questions', QuestionAnswerMethod)
 router.register('another_questions', AnotherQuestionAnswerMethod)
 router.register('last_page', LastPageMethod)
 router.register('client/answer', ClientAnswerMethod)
-router.register('client/answer/create1', CreateClientAnswerMethod)
 router.register('client/answer/create', NewCreateClientAnswerMethod)
+router.register('client/answer/add', CreateClientAnswerMethod)
 
 
 # urlpatterns = router.urls

@@ -143,9 +143,9 @@ class CreateClientAnswerMethod(viewsets.ViewSet):
                 if clientAnswer_ser.is_valid():
                     clientAnswer_ser.save()
                 else:
-                    return Response("Invalid data!, phone number already exist", status=400)
+                    return Response("Invalid data!", status=400)
             return Response("Client created successfully", status=201)
-        return Response("Invalid data!", status=400)
+        return Response("Invalid data!, May be phone number already exist", status=400)
 
 
 # new method to create and update client if already exist
@@ -191,6 +191,8 @@ class NewCreateClientAnswerMethod(viewsets.ViewSet):
                 else:
                     return Response("Invalid data!", status=400)
 
+            return Response("Client updated successfully", status=201)
+
         else:
             client_data = {"type":data["type"], "name":data["name"], "phone":data["phone"], "length":data["length"], "weight":data["weight"], "description":data["description"]}
             client_ser = ClientSerializer(data=client_data)
@@ -208,5 +210,6 @@ class NewCreateClientAnswerMethod(viewsets.ViewSet):
                     clientAnswer_ser.save()
                 else:
                     return Response("Invalid data!", status=400)
-        return Response("Client created successfully", status=201)
+
+            return Response("Client created successfully", status=201)
 
