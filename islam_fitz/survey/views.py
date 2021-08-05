@@ -24,8 +24,6 @@ class QuestionAnswerMethod(viewsets.ViewSet):
         sex_type = data['type']
         question = Question.objects.all()
         questions = question_type_filter(question, sex_type)
-        print("questions: ", questions)
-        print("len questions: ", len(questions))
         if len(questions) == 0:
             return Response("Invalid data!", status=400)
         ser = QuestionAnswerSerializer(questions, context={"request": request}, many=True)
@@ -49,8 +47,6 @@ class AnotherQuestionAnswerMethod(viewsets.ViewSet):
         if (sex_type is not None and sex_type !=""):
             question = Question.objects.all()
             questions = question_type_filter(question, sex_type)
-            print("questions: ", questions)
-            print("len questions: ", len(questions))
             if len(questions) == 0:
                 return Response("Invalid data!", status=400)
             ser = QuestionAnswerSerializer(questions, context={"request": request}, many=True)
@@ -102,12 +98,10 @@ class ClientAnswerMethod(viewsets.ViewSet):
 
     def list(self, request):
         client = Client.objects.all()
-        print("clients: ", client)
-        print("len clients: ", len(client))
         if len(client) == 0:
             return Response("Invalid data!", status=400)
         ser = ClientSerializer(client, many=True)
-        return Response(ser.data)
+        return Response(ser.data, status=200)
 
 
 class CreateClientAnswerMethod(viewsets.ViewSet):
@@ -132,8 +126,6 @@ class CreateClientAnswerMethod(viewsets.ViewSet):
         client_ser = ClientSerializer(data=client_data)
         if client_ser.is_valid():
             client_ser.save()
-            print("client_ser.data",client_ser.data)
-            print("answer:",answer)
 
             # answersID=[]
             # for i in range(len(answer)):
@@ -141,9 +133,8 @@ class CreateClientAnswerMethod(viewsets.ViewSet):
             #     answersID.append(x)
             #     i = i+1
             # print("answerID: ", answersID)
+
             clientID = Client.objects.get(phone=data["phone"]).id
-            print("clientID: ", clientID)
-            # clientID.id
             i = 0
             for j in answer:
                 clientAnswer_data = {"client":clientID, "client_answer":answer[i]}
@@ -157,4 +148,65 @@ class CreateClientAnswerMethod(viewsets.ViewSet):
         return Response("Invalid data!", status=400)
 
 
+# new method to create and update client if already exist
+class NewCreateClientAnswerMethod(viewsets.ViewSet):
+    """
+    create:
+    Create client answers list, takes the following parameters:
+    - type
+    - name
+    - phone
+    - length
+    - weight
+    - description
+    - answer
+    """
+    permission_classes = [AllowAny]
+    queryset = Question.objects.none()
+    
+    def create(self, request):
+        data = JSONParser().parse(request)
+        answer = data['answer']
+        client_exist = Client.objects.filter(phone=data['phone'])
+        if client_exist:
+            if "type" in data:
+                client_exist.update(type=data["type"])
+            if "name" in data:
+                client_exist.update(name=data["name"])
+            if "length" in data:
+                client_exist.update(length=data["length"])
+            if "weight" in data:
+                client_exist.update(weight=data["weight"])
+            if "description" in data:
+                client_exist.update(description=data["description"])
+            clientID = Client.objects.get(phone=data["phone"]).id
+            i = 0
+            ClientAnswerList.objects.filter(client=clientID).delete()
+            for j in answer:
+                clientAnswer_data = {"client":clientID, "client_answer":answer[i]}
+                clientAnswer_ser = ClientAnswerListSerializer(data = clientAnswer_data)
+                i = i+1
+                if clientAnswer_ser.is_valid():
+                    clientAnswer_ser.save()
+                else:
+                    return Response("Invalid data!", status=400)
+
+        else:
+            client_data = {"type":data["type"], "name":data["name"], "phone":data["phone"], "length":data["length"], "weight":data["weight"], "description":data["description"]}
+            client_ser = ClientSerializer(data=client_data)
+            if client_ser.is_valid():
+                client_ser.save()
+
+            clientID = Client.objects.get(phone=data["phone"]).id
+            print("clientID: ", clientID)
+            i = 0
+            for j in answer:
+                clientAnswer_data = {"client":clientID, "client_answer":answer[i]}
+                clientAnswer_ser = ClientAnswerListSerializer(data = clientAnswer_data)
+                i = i+1
+                if clientAnswer_ser.is_valid():
+                    clientAnswer_ser.save()
+                else:
+                    return Response("Invalid data!", status=400)
+        return Response("Client created successfully", status=201)
 
