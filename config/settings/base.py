@@ -304,7 +304,7 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r".*",
     # r"^https://\w+\.example\.com$",
 ]
-ALLOWED_HOSTS=['*']
+
 
 
 CORS_ALLOW_METHODS = list(default_methods) + [
