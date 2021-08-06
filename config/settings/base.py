@@ -299,6 +299,9 @@ CORS_URLS_REGEX = r"^/api/.*$"
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = False
 CORS_REPLACE_HTTPS_REFERER = True
+CORS_ORIGIN_WHITELIST = (
+    "http://localhost:8080",
+)
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r".*",
@@ -320,7 +323,6 @@ CORS_ALLOW_HEADERS = [
     'user-agent',
     'x-csrftoken',
     'x-requested-with',
-    'Access-Control-Allow-Origin'
 ]
 CORS_ALLOW_HEADERS = default_headers + (
     'Credential-Token',
