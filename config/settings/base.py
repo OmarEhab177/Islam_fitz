@@ -4,6 +4,7 @@ Base settings to build other settings files upon.
 from pathlib import Path
 
 import environ
+from corsheaders.defaults import default_methods, default_headers
 
 ROOT_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 # islam_fitz/
@@ -143,6 +144,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.common.BrokenLinkEmailsMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    
 ]
 
 
@@ -291,11 +293,13 @@ REST_FRAMEWORK = {
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
+
 CORS_URLS_REGEX = r"^/api/.*$"
 # Your stuff...
 # ------------------------------------------------------------------------------
-CORS_ALLOW_ALL_ORIGINS  = True
-# CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_REPLACE_HTTPS_REFERER = True
 # CORS_ALLOWED_ORIGINS = [
 #     'http://localhost:8080',
 # ]
@@ -306,13 +310,11 @@ CORS_ALLOWED_ORIGIN_REGEXES = [
     r".*",
     # r"^https://\w+\.example\.com$",
 ]
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
+ALLOWED_HOSTS=['*']
+
+
+CORS_ALLOW_METHODS = list(default_methods) + [
+    'POKE',
 ]
 CORS_ALLOW_HEADERS = [
     'accept',
@@ -325,3 +327,9 @@ CORS_ALLOW_HEADERS = [
     'x-csrftoken',
     'x-requested-with',
 ]
+CORS_ALLOW_HEADERS = default_headers + (
+    'Credential-Token',
+)
+CSRF_TRUSTED_ORIGINS = (
+    'localhost:8080' 
+)
