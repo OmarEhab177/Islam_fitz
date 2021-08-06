@@ -215,14 +215,14 @@ FIXTURE_DIRS = (str(APPS_DIR / "fixtures"),)
 # SECURITY
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#session-cookie-httponly
-SESSION_COOKIE_HTTPONLY = False
+SESSION_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#csrf-cookie-httponly
-CSRF_COOKIE_HTTPONLY = False
+CSRF_COOKIE_HTTPONLY = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#secure-browser-xss-filter
-SECURE_BROWSER_XSS_FILTER = False
+SECURE_BROWSER_XSS_FILTER = True
 # https://docs.djangoproject.com/en/dev/ref/settings/#x-frame-options
-# X_FRAME_OPTIONS = "DENY"
-X_FRAME_OPTIONS = 'SAMEORIGIN'
+X_FRAME_OPTIONS = "DENY"
+# X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # EMAIL
 # ------------------------------------------------------------------------------
@@ -294,26 +294,44 @@ REST_FRAMEWORK = {
 }
 
 # django-cors-headers - https://github.com/adamchainz/django-cors-headers#setup
-CORS_URLS_REGEX = r"^/api/.*$"
+
 # Your stuff...
 # ------------------------------------------------------------------------------
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_ALL_ORIGINS = True
+# CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = [
+"https://fitzonline.net",
+"https://www.fitzonline.net",
+"http://localhost:8080",
+"http://127.0.0.1:8080",
+"http://127.0.0.1:9000"
+]
 CORS_REPLACE_HTTPS_REFERER = True
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:8080",
+    "http://127.0.0.1:8080",
 ]
 
 CORS_ALLOWED_ORIGIN_REGEXES = [
     r".*",
-    # r"^https://\w+\.example\.com$",
+    r"^https://\w+\.example\.com$",
 ]
 
+CORS_URLS_REGEX = r"^/api/.*$"
 
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 CORS_ALLOW_METHODS = list(default_methods) + [
     'POKE',
 ]
+
 CORS_ALLOW_HEADERS = [
     'accept',
     'accept-encoding',
