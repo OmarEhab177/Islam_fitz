@@ -97,8 +97,8 @@ class Client(models.Model):
     type   = models.CharField(max_length=15)
     name   = models.CharField(max_length=255)
     phone  = models.CharField(max_length=50, unique=True)
-    length = models.DecimalField(max_digits=8, decimal_places=2)
-    weight = models.DecimalField(max_digits=8, decimal_places=2)
+    length = models.CharField(max_length=15)
+    weight = models.CharField(max_length=15)
     description = models.CharField(max_length=255, null=True, blank=True)
 
     class Meta:
