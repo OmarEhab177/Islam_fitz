@@ -300,32 +300,35 @@ REST_FRAMEWORK = {
 # CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
-"https://fitzonline.net",
-"https://www.fitzonline.net",
-"http://localhost:8080",
-"http://127.0.0.1:8080",
-"http://127.0.0.1:9000"
-]
-CORS_REPLACE_HTTPS_REFERER = True
-CORS_ORIGIN_WHITELIST = [
+    "https://fitzonline.net",
+    "https://www.fitzonline.net",
     "http://localhost:8080",
     "http://127.0.0.1:8080",
+    "http://127.0.0.1:9000"
 ]
 
+# CORS_ORIGIN_WHITELIST = [
+#     "https://fitzonline.net",
+#     "https://www.fitzonline.net",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:8080",
+#     "http://127.0.0.1:9000"
+# ]
+# CORS_ALLOW_ALL_ORIGINS = True
+
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r".*",
     r"^https://\w+\.example\.com$",
 ]
 
 CORS_URLS_REGEX = r"^/api/.*$"
 
 CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
 ]
 
 CORS_ALLOW_METHODS = list(default_methods) + [
@@ -333,19 +336,20 @@ CORS_ALLOW_METHODS = list(default_methods) + [
 ]
 
 CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
-CORS_ALLOW_HEADERS = default_headers + (
-    'Credential-Token',
-)
-CSRF_TRUSTED_ORIGINS = (
-    'localhost:8080' 
-)
+CSRF_TRUSTED_ORIGINS = [
+    "https://fitzonline.net",
+    "https://www.fitzonline.net",
+    "http://localhost:8080",
+    "http://127.0.0.1:8080",
+    "http://127.0.0.1:9000"
+]

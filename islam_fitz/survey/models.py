@@ -66,7 +66,7 @@ class QuestionAnswerList(models.Model):
         verbose_name_plural = "QuestionAnswerList"
 
     def __str__(self):
-        return self.question.question_title
+        return self.question.question
 
 
 class LastPage(models.Model):

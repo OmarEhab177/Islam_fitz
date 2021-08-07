@@ -6,7 +6,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["example.com", "143.244.179.162", 'localhost', 'fitzonline.net', "www.fitzonline.net", "http://localhost:8080"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["example.com", "143.244.179.162", 'localhost', 'fitzonline.net', "www.fitzonline.net", "http://localhost:8080", "http://127.0.0.1:8080",])
 # DATABASES
 # ------------------------------------------------------------------------------
 DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
