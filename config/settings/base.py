@@ -297,15 +297,15 @@ REST_FRAMEWORK = {
 
 # Your stuff...
 # ------------------------------------------------------------------------------
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 # CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "https://fitzonline.net",
-    "https://www.fitzonline.net",
-    "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "http://127.0.0.1:9000"
-]
+# CORS_ALLOWED_ORIGINS = [
+#     "https://fitzonline.net",
+#     "https://www.fitzonline.net",
+#     "http://localhost:8080",
+#     "http://127.0.0.1:8080",
+#     "http://127.0.0.1:9000"
+# ]
 
 # CORS_ORIGIN_WHITELIST = [
 #     "https://fitzonline.net",
@@ -350,6 +350,6 @@ CSRF_TRUSTED_ORIGINS = [
     "https://fitzonline.net",
     "https://www.fitzonline.net",
     "http://localhost:8080",
-    "http://127.0.0.1:8080",
-    "http://127.0.0.1:9000"
+    "http://192.168.1.7:8080",
+    "http://192.168.1.7:9000"
 ]
