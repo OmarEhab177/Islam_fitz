@@ -68,6 +68,7 @@ class LastPageSerializer(serializers.ModelSerializer):
             'id',
             "video_url",
             "description",
+            "whatsapp_text",
             "whatsapp_number"
         )
     def get_video_url(self, lastPage):

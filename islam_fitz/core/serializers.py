@@ -57,11 +57,14 @@ class HomeSerializer(serializers.ModelSerializer):
     logo_url = serializers.SerializerMethodField()
     intro_image_url = serializers.SerializerMethodField()
     about_us_image_url = serializers.SerializerMethodField()
+    text_image_url = serializers.SerializerMethodField()
     class Meta:
         model = Home
         fields = (
             "id",
             "logo_url",
+            "text_image_url",
+            "first_text",
             "intro_title",
             "intro_image_url",
             "intro_text",
@@ -82,6 +85,11 @@ class HomeSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
         about_us_image_url = home.about_us_image.url
         return request.build_absolute_uri(about_us_image_url)
+
+    def get_text_image_url(self, home):
+        request = self.context.get("request")
+        text_image_url = home.text_image.url
+        return request.build_absolute_uri(text_image_url)
 
 class FooterSerializer(serializers.ModelSerializer):
     class Meta:

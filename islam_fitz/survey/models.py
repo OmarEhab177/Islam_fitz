@@ -72,6 +72,7 @@ class QuestionAnswerList(models.Model):
 class LastPage(models.Model):
     video = models.FileField(upload_to="videos/%y/%m/%d")
     description = models.TextField()
+    whatsapp_text = models.CharField(max_length=250, default="تواصل واتساب لبدء المتابعه")
     whatsapp_number = models.CharField(max_length=50)
 
     class Meta:
