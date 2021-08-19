@@ -19,6 +19,7 @@ class BeforeAndAfter(models.Model):
 
 
 class AboutUs(models.Model):
+    about_us_title = models.CharField(max_length=250, null=True, blank=True, default=1)
     photo = models.ImageField(upload_to = 'photos/about_us/%y/%m/%d')
     description = models.TextField()
 
@@ -30,12 +31,14 @@ class Home(models.Model):
     logo = models.ImageField(upload_to = 'photos/logo/%y/%m/%d')
     blog = models.CharField(max_length=250)
     text_image = models.ImageField(upload_to = 'photos/home/%y/%m/%d', null=True, blank=True)
-    first_text = models.CharField(max_length=250, null=True, blank=True)
+    type_question = models.CharField(max_length=250, null=True, blank=True)
     intro_title = models.CharField(max_length=250, null=True, blank=True, default=1)
     intro_image = models.ImageField(upload_to = 'photos/home/%y/%m/%d')
     intro_text = models.TextField()
+    about_us_title = models.CharField(max_length=250, null=True, blank=True, default=1)
     about_us_image = models.ImageField(upload_to = 'photos/home/%y/%m/%d')
     about_us_text = models.TextField()
+    before_after_title = models.CharField(max_length=250, null=True, blank=True, default=1)
 
     class Meta:
         verbose_name = 'Home'

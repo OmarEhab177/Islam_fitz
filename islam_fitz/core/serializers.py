@@ -45,6 +45,7 @@ class AboutUsSerializer(serializers.ModelSerializer):
         model = AboutUs
         fields = (
             "id",
+            "about_us_title",
             "photo_url",
             "description"
         )
@@ -64,12 +65,14 @@ class HomeSerializer(serializers.ModelSerializer):
             "id",
             "logo_url",
             "text_image_url",
-            "first_text",
+            "type_question",
             "intro_title",
             "intro_image_url",
             "intro_text",
+            "about_us_title",
             "about_us_image_url",
             "about_us_text",
+            "before_after_title",
         )
     def get_logo_url(self, home):
         request = self.context.get("request")
