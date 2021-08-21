@@ -5,7 +5,7 @@ from django.db import models
 
 class BeforeAndAfter(models.Model):
     name = models.CharField(max_length=30)
-    description = models.CharField(max_length=255, default=1)
+    client_name = models.CharField(max_length=255, default=1)
     image = models.ImageField(upload_to = 'photos/before_and_after/%y/%m/%d')
     feature = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
@@ -15,7 +15,7 @@ class BeforeAndAfter(models.Model):
         verbose_name_plural = 'BeforeAndAfter'
 
     def __str__(self):
-        return self.description
+        return self.client_name
 
 
 class AboutUs(models.Model):
