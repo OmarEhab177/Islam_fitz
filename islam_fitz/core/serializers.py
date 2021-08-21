@@ -29,7 +29,6 @@ class BeforeAndAfterSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
-            "description",
             "image_url",
             "feature",
             "active",
