@@ -4,8 +4,7 @@ from django.db import models
 
 
 class BeforeAndAfter(models.Model):
-    name = models.CharField(max_length=200)
-    description = models.CharField(max_length=255)
+    name = models.CharField(max_length=30)
     image = models.ImageField(upload_to = 'photos/before_and_after/%y/%m/%d')
     feature = models.BooleanField(default=False)
     active = models.BooleanField(default=True)
